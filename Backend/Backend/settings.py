@@ -146,7 +146,6 @@ MEDIA_URL = '/media/'               #URL to access media files in frontend
 MEDIA_ROOT = BASE_DIR / 'media'     #Directory where media files will be stored in the backend
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ALLOWED_HOSTS = ["*"]  # Allow all hosts for development purposes. In production, specify the allowed hosts.
