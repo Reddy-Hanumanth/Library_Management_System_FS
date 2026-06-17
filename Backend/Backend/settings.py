@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,9 +48,9 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]    #it detects the request is coming from react and it allows to access the data from django url to react url
 
 MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,14 +82,25 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'library_db',
+#         'USER' : 'root',
+#         'PASSWORD' : 'Hanumanth@100',
+#         'HOST' : 'localhost',
+#         'PORT' : '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'library_db',
-        'USER' : 'root',
-        'PASSWORD' : 'Hanumanth@100',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -134,5 +145,8 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'               #URL to access media files in frontend
 MEDIA_ROOT = BASE_DIR / 'media'     #Directory where media files will be stored in the backend
 
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 ALLOWED_HOSTS = ["*"]  # Allow all hosts for development purposes. In production, specify the allowed hosts.
