@@ -41,11 +41,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders'        #Help to Connect Differenet Url Like Django url and react url
 ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://library-management-system.vercel.app",
+]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]   
-
-
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]    #it detects the request is coming from react and it allows to access the data from django url to react url
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "https://library-management-system.vercel.app",
+]    #it detects the request is coming from react and it allows to access the data from django url to react url
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
