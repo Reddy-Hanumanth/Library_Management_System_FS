@@ -210,8 +210,8 @@ const Navabar = () => {
 
                   <li className="nav-item">
                     <Link
-                      className={`nav-link ${isActive("/")}`}
-                      to="/admin/dashboard"
+                      className={`nav-link ${isActive("/admin/change-password")}`}
+                      to="/admin/change-password"
                     >
                       <i className="fa-solid fa-key me-1"></i>
                       Change Password

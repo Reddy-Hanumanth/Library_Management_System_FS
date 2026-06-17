@@ -7,6 +7,7 @@ from .models import *
 from .serializers import *
 from django.shortcuts import get_object_or_404
 
+
 @api_view(['POST'])
 def admin_login(request):
     username = request.data.get('username')
@@ -270,4 +271,83 @@ def delete_Book(request, id):
             'message': 'Book deleted successfully'
         },  
         status=status.HTTP_200_OK,
+    )
+
+
+
+
+
+@api_view(['POST'])
+def admin_Change_Password(request):
+    username = request.data.get('username')
+    current_password = request.data.get('current_password')
+    new_password = request.data.get('newPassword')
+    confirm_password = request.data.get('confirmPassword')
+
+    # Validate required fields
+    if not username or not current_password or not new_password or not confirm_password:
+        return Response(
+            {
+                'success': False,
+                'message': 'All fields are required'
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Check password match
+    if new_password != confirm_password:
+        return Response(
+            {
+                'success': False,
+                'message': 'New password and confirm password do not match'
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Check password length
+    if len(new_password) < 6:
+        return Response(
+            {
+                'success': False,
+                'message': 'New password must be at least 6 characters long'
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Authenticate current credentials
+    user = authenticate(
+        request,
+        username=username,
+        password=current_password
+    )
+
+    if user is None:
+        return Response(
+            {
+                'success': False,
+                'message': 'Current password is incorrect'
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Optional: Only admin users can change password here
+    if not user.is_staff:
+        return Response(
+            {
+                'success': False,
+                'message': 'Access denied'
+            },
+            status=status.HTTP_403_FORBIDDEN
+        )
+
+    # Update password
+    user.set_password(new_password)
+    user.save()
+
+    return Response(
+        {
+            'success': True,
+            'message': 'Password changed successfully'
+        },
+        status=status.HTTP_200_OK
     )

@@ -12,6 +12,7 @@ import Add_author from './Pages/Add_author'
 import Manage_author from './Pages/Manage_author'
 import Add_Book from './Pages/Add_Book'
 import Manage_books from './Pages/Manage_books'
+import AdminChangePassword from './Pages/AdminChangePassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
       <Route path='/author/manage-author' element={<Manage_author />} />
       <Route path='/book/add-book' element={<Add_Book />} />
       <Route path='/book/manage-book' element={<Manage_books />} />
+      <Route path='/admin/change-password' element={<AdminChangePassword />} />
     </Routes>
 
     </>
