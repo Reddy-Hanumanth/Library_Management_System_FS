@@ -96,11 +96,11 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('library_db'),
+        'USER': os.getenv('root'),
+        'PASSWORD': os.getenv('Hanumanth@100'),
+        'HOST': os.getenv('localhost'),
+        'PORT': os.getenv('3306'),
     }
 }
 
