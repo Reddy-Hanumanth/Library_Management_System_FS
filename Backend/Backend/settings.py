@@ -43,12 +43,12 @@ INSTALLED_APPS = [
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://library-management-system.vercel.app",
+    "https://library-management-system-fs.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
-    "https://library-management-system.vercel.app",
+    "https://library-management-system-fs.vercel.app",
 ]    #it detects the request is coming from react and it allows to access the data from django url to react url
 
 MIDDLEWARE = [
@@ -97,14 +97,15 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('library_db'),
-        'USER': os.getenv('root'),
-        'PASSWORD': os.getenv('Hanumanth@100'),
-        'HOST': os.getenv('localhost'),
-        'PORT': os.getenv('3306'),
+        'NAME': os.getenv('DB_NAME', 'library_db'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Hanumanth@100'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -143,10 +144,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
 
 MEDIA_URL = '/media/'               #URL to access media files in frontend
+
 MEDIA_ROOT = BASE_DIR / 'media'     #Directory where media files will be stored in the backend
 
 STATIC_URL = '/static/'
