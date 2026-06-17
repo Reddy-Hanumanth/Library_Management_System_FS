@@ -48,6 +48,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
 CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]    #it detects the request is coming from react and it allows to access the data from django url to react url
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -134,3 +135,4 @@ MEDIA_URL = '/media/'               #URL to access media files in frontend
 MEDIA_ROOT = BASE_DIR / 'media'     #Directory where media files will be stored in the backend
 
 
+ALLOWED_HOSTS = ["*"]  # Allow all hosts for development purposes. In production, specify the allowed hosts.
