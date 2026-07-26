@@ -1,4 +1,4 @@
-import React from "react";
+// import react from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -18,11 +18,11 @@ const AdminChangePassword = () => {
     const navigate = useNavigate();
     const adminUser = localStorage.getItem("adminUser");
 
-    useEffect(() => {
-        if (!adminUser) {
-            navigate("/admin");
-        }
-    }, []);
+        useEffect(() => {
+            if (!adminUser) {
+                navigate("/admin");
+            }
+        }, [adminUser, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

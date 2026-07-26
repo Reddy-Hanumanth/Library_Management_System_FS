@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -64,20 +64,20 @@ const Navabar = () => {
                   <li className="nav-item">
                     <Link
                       className={`nav-link d-flex align-items-center px-3 py-2 ${isActive("/login")}`}
-                      to="/login"
+                      to="/user/login"
                     >
                       <i className="fa-solid fa-user me-2"></i>
-                      Login
+                      User Login
                     </Link>
                   </li>
 
                   <li className="nav-item">
                     <Link
                       className={`nav-link d-flex align-items-center px-3 py-2 ${isActive("/signup")}`}
-                      to="/signup"
+                      to="/user/signup"
                     >
                       <i className="fa-solid fa-user-plus me-2"></i>
-                      Sign Up
+                      User Sign Up
                     </Link>
                   </li>
 

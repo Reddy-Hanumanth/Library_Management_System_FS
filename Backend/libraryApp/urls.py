@@ -22,4 +22,6 @@ urlpatterns = [
     path('books/delete/<int:id>/', views.delete_Book, name="books-delete"),
 
     path('admin/change-password/', views.admin_Change_Password, name="admin-change-password"),
+
+    path('user_signup/', views.user_signup, name="user-signup"),
 ]

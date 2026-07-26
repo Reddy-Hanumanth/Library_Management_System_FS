@@ -351,3 +351,73 @@ def admin_Change_Password(request):
         },
         status=status.HTTP_200_OK
     )
+
+
+
+from django.contrib.auth.hashers import make_password
+@api_view(["POST"])
+def user_signup(request):
+    UserName = request.data.get("Fullname")
+    MobileNumber = request.data.get("mobile")
+    Email = request.data.get("email")
+    Password = request.data.get("password")
+    Confirm_Password = request.data.get("confirm_Password")
+
+    if Password != Confirm_Password:
+        return Response(
+            {
+                "success" : False,
+                "message" : "Password and confirm password do not match"
+            },
+            status = status.HTTP_400_BAD_REQUEST
+        )
+
+    if len(Password) < 6:
+        return Response(
+            {
+                "success" : False,
+                "message" : "Password must be at least 6 characters"
+            },
+            status = status.HTTP_400_BAD_REQUEST
+        )
+
+    
+
+    last_Student= Student.objects.all().order_by("-id").first()
+    if last_Student and last_Student.student_id.isdigit():
+        new_id_int = int(last_Student.student_id)+1
+        
+    else:
+        new_id_int = "1001"
+
+    student_id = str(new_id_int)
+
+    if Student.objects.filter(email=Email).exists():
+        return Response(
+            {
+                "success" : False,
+                "message" : "User with this email already exist"
+            },
+            status = status.HTTP_400_BAD_REQUEST
+        )
+
+
+    hashed_password = make_password(Password)
+
+    student = Student.objects.create(
+        student_id = student_id,
+        Full_name  = UserName,
+        email  = Email,
+        mobile  = MobileNumber,
+        password  = hashed_password,
+        is_activate = True
+    )
+
+    return Response({
+        "success" : True,
+        "message" : "User registered succesfully",
+        "student_id" : student.student_id,
+        "full_name" : student.Full_name,
+    },
+    status = status.HTTP_201_CREATED
+    )
